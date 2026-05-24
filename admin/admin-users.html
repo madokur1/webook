@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Admin Users - Transient House Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="admin-shell d-flex">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top px-3 py-4 text-white">
+          <div class="brand d-flex align-items-center gap-2">
+            <div class="brand-text">
+              <div class="brand-title">TRANSIENT ADMIN</div>
+              <div class="brand-subtitle">Management</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav flex-column px-2">
+          <a href="index.html" class="nav-link" data-section="dashboard"><i class="fa fa-gauge me-2"></i>Dashboard</a>
+          <a href="rooms.html" class="nav-link" data-section="rooms"><i class="fa fa-bed me-2"></i>Rooms</a>
+          <a href="bookings.html" class="nav-link" data-section="bookings"><i class="fa fa-calendar-check me-2"></i>Bookings</a>
+          <a href="admin-users.html" class="nav-link active" data-section="users"><i class="fa fa-users me-2"></i>Admin Users</a>
+          <a href="#" class="nav-link mt-auto text-danger" id="logoutBtn"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+        </nav>
+      </aside>
+
+      <div class="main flex-fill">
+        <header class="topbar d-flex align-items-center justify-content-between px-3">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-sm btn-toggle d-md-none" id="toggleSidebar"><i class="fa fa-bars"></i></button>
+            <h5 class="mb-0 text-white header-title">Admin Users</h5>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-main-site" href="../index.html">OPEN THE MAIN SITE</a>
+            <div class="dropdown">
+              <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <strong>Admin</strong>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" id="logoutMenu">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <main class="content p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4 gap-3 flex-wrap">
+            <div>
+              <h4 class="mb-1">Admin User Management</h4>
+              <p class="text-muted small mb-0">Create and manage admin accounts that can access the dashboard.</p>
+            </div>
+            <button class="btn btn-primary" id="addUserBtn"><i class="fa fa-plus me-2"></i>Add Admin User</button>
+          </div>
+
+          <div class="row g-3 mb-4">
+            <div class="col-lg-4">
+              <div class="card p-3">
+                <h6 class="mb-3">Admin count</h6>
+                <div class="display-6" id="adminCount">0</div>
+                <p class="text-muted">Current active admin accounts in the system.</p>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card p-3">
+                <h6 class="mb-3">Latest login</h6>
+                <p class="text-muted" id="latestLogin">No activity yet</p>
+              </div>
+            </div>
+            <div class="col-lg-4">
+              <div class="card p-3">
+                <h6 class="mb-3">Access note</h6>
+                <p class="text-muted">Only owner-level admins should be allowed to add or remove admin accounts.</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="card p-3 mb-4">
+            <div class="d-flex justify-content-between align-items-center mb-3 gap-3 flex-wrap">
+              <div class="search d-flex align-items-center gap-2">
+                <i class="fa fa-search text-muted"></i>
+                <input id="adminSearch" class="form-control form-control-sm" placeholder="Search admin users..." style="min-width: 220px;" />
+              </div>
+              <div class="d-flex gap-2">
+                <select id="roleFilter" class="form-select form-select-sm" style="width: 160px;">
+                  <option value="All">All Roles</option>
+                  <option value="Owner">Owner</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Staff">Staff</option>
+                </select>
+                <button class="btn btn-sm btn-outline-secondary" id="refreshUsersBtn"><i class="fa fa-sync me-1"></i>Refresh</button>
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover table-sm align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Name</th>
+                    <th>Email</th>
+                    <th>Role</th>
+                    <th>Last Active</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="adminUsersTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="modal fade" id="adminUserModal" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="adminUserModalTitle">Add Admin User</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="adminUserForm">
+              <div class="mb-3">
+                <label class="form-label">Full Name</label>
+                <input id="adminName" type="text" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Email Address</label>
+                <input id="adminEmail" type="email" class="form-control" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Role</label>
+                <select id="adminRole" class="form-select" required>
+                  <option value="Owner">Owner</option>
+                  <option value="Manager">Manager</option>
+                  <option value="Staff">Staff</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Last Active</label>
+                <input id="adminLastActive" type="date" class="form-control" required>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="saveAdminUserBtn">Save User</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const STORAGE_KEY = 'dredsAdminUsers';
+        const adminUsersTable = document.getElementById('adminUsersTable');
+        const adminCount = document.getElementById('adminCount');
+        const latestLogin = document.getElementById('latestLogin');
+        const adminSearch = document.getElementById('adminSearch');
+        const roleFilter = document.getElementById('roleFilter');
+        const addUserBtn = document.getElementById('addUserBtn');
+        const saveAdminUserBtn = document.getElementById('saveAdminUserBtn');
+        const adminUserModal = new bootstrap.Modal(document.getElementById('adminUserModal'));
+        const adminUserModalTitle = document.getElementById('adminUserModalTitle');
+        const adminUserForm = document.getElementById('adminUserForm');
+        const adminName = document.getElementById('adminName');
+        const adminEmail = document.getElementById('adminEmail');
+        const adminRole = document.getElementById('adminRole');
+        const adminLastActive = document.getElementById('adminLastActive');
+        let activeIndex = null;
+
+        const loadUsers = () => {
+          const stored = localStorage.getItem(STORAGE_KEY);
+          if (!stored) return [
+            { name: 'Super Admin', email: 'admin@dredstransient.com', role: 'Owner', lastActive: '2025-05-20' },
+            { name: 'Maria Santos', email: 'maria@dredstransient.com', role: 'Manager', lastActive: '2025-05-18' },
+            { name: 'Rafael Cruz', email: 'rafael@dredstransient.com', role: 'Staff', lastActive: '2025-05-15' }
+          ];
+          try {
+            return JSON.parse(stored);
+          } catch (error) {
+            return [];
+          }
+        };
+
+        const saveUsers = (users) => {
+          localStorage.setItem(STORAGE_KEY, JSON.stringify(users));
+        };
+
+        let users = loadUsers();
+
+        const formatDate = (dateString) => {
+          if (!dateString) return 'N/A';
+          const date = new Date(dateString);
+          return isNaN(date.getTime()) ? dateString : date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+        };
+
+        const updateSummary = () => {
+          adminCount.textContent = users.length;
+          const lastActiveDate = users.map((user) => new Date(user.lastActive)).filter((d) => !isNaN(d.getTime()));
+          const latest = lastActiveDate.length ? new Date(Math.max(...lastActiveDate)).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'No activity yet';
+          latestLogin.textContent = latest;
+        };
+
+        const renderUsers = (list) => {
+          adminUsersTable.innerHTML = list.length ? list.map((user, index) => `
+            <tr>
+              <td><strong>${user.name}</strong></td>
+              <td>${user.email}</td>
+              <td>${user.role}</td>
+              <td>${formatDate(user.lastActive)}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-primary me-1" type="button" data-index="${index}" data-action="edit">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" type="button" data-index="${index}" data-action="delete">Delete</button>
+              </td>
+            </tr>
+          `).join('') : '<tr><td colspan="5" class="text-center text-muted">No admin users found.</td></tr>';
+        };
+
+        const filterUsers = () => {
+          const searchTerm = adminSearch.value.trim().toLowerCase();
+          const selectedRole = roleFilter.value;
+          return users.filter((user) => {
+            const matchesSearch = `${user.name} ${user.email} ${user.role}`.toLowerCase().includes(searchTerm);
+            const matchesRole = selectedRole === 'All' || user.role === selectedRole;
+            return matchesSearch && matchesRole;
+          });
+        };
+
+        const resetForm = () => {
+          activeIndex = null;
+          adminUserForm.reset();
+          adminRole.value = 'Staff';
+          adminLastActive.value = new Date().toISOString().slice(0, 10);
+          adminUserModalTitle.textContent = 'Add Admin User';
+          saveAdminUserBtn.textContent = 'Save User';
+        };
+
+        const openModalForEdit = (index) => {
+          activeIndex = index;
+          const user = users[index];
+          if (!user) return;
+          adminName.value = user.name;
+          adminEmail.value = user.email;
+          adminRole.value = user.role;
+          adminLastActive.value = user.lastActive;
+          adminUserModalTitle.textContent = 'Edit Admin User';
+          saveAdminUserBtn.textContent = 'Update User';
+          adminUserModal.show();
+        };
+
+        const deleteUser = (index) => {
+          if (!users[index]) return;
+          if (!confirm(`Delete admin account for ${users[index].name}?`)) return;
+          users.splice(index, 1);
+          saveUsers(users);
+          renderUsers(filterUsers());
+          updateSummary();
+        };
+
+        addUserBtn.addEventListener('click', () => {
+          resetForm();
+          adminUserModal.show();
+        });
+
+        saveAdminUserBtn.addEventListener('click', () => {
+          const name = adminName.value.trim();
+          const email = adminEmail.value.trim();
+          const role = adminRole.value;
+          const lastActive = adminLastActive.value;
+          if (!name || !email || !role || !lastActive) {
+            alert('Please fill in all fields.');
+            return;
+          }
+          const newUser = { name, email, role, lastActive };
+          if (activeIndex === null) {
+            users.push(newUser);
+          } else {
+            users[activeIndex] = newUser;
+          }
+          saveUsers(users);
+          renderUsers(filterUsers());
+          updateSummary();
+          adminUserModal.hide();
+        });
+
+        document.getElementById('adminUsersTable').addEventListener('click', (event) => {
+          const button = event.target.closest('button');
+          if (!button) return;
+          const index = Number(button.dataset.index);
+          if (button.dataset.action === 'edit') {
+            openModalForEdit(index);
+          } else if (button.dataset.action === 'delete') {
+            deleteUser(index);
+          }
+        });
+
+        [adminSearch, roleFilter].forEach((input) => {
+          input.addEventListener('input', () => renderUsers(filterUsers()));
+        });
+
+        document.getElementById('refreshUsersBtn').addEventListener('click', () => {
+          users = loadUsers();
+          renderUsers(filterUsers());
+          updateSummary();
+        });
+
+        document.getElementById('toggleSidebar')?.addEventListener('click', () => {
+          document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('login.html');
+        });
+        document.getElementById('logoutMenu')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('login.html');
+        });
+
+        if (localStorage.getItem('adminAuth') !== 'true') {
+          location.replace('login.html');
+          return;
+        }
+
+        renderUsers(filterUsers());
+        updateSummary();
+        resetForm();
+      });
+    </script>
+  </body>
+</html>

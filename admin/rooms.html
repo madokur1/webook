@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Rooms - Transient House Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="admin-shell d-flex">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top px-3 py-4 text-white">
+          <div class="brand d-flex align-items-center gap-2">
+            <div class="brand-text">
+              <div class="brand-title">TRANSIENT ADMIN</div>
+              <div class="brand-subtitle">Management</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav flex-column px-2">
+          <a href="index.html" class="nav-link" data-section="dashboard"><i class="fa fa-gauge me-2"></i>Dashboard</a>
+          <a href="rooms.html" class="nav-link active" data-section="rooms"><i class="fa fa-bed me-2"></i>Rooms</a>
+          <a href="bookings.html" class="nav-link" data-section="bookings"><i class="fa fa-calendar-check me-2"></i>Bookings</a>
+          <a href="admin-users.html" class="nav-link" data-section="users"><i class="fa fa-users me-2"></i>Admin Users</a>
+          <a href="#" class="nav-link mt-auto text-danger" id="logoutBtn"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+        </nav>
+      </aside>
+
+      <div class="main flex-fill">
+        <header class="topbar d-flex align-items-center justify-content-between px-3">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-sm btn-toggle d-md-none" id="toggleSidebar"><i class="fa fa-bars"></i></button>
+            <h5 class="mb-0 text-white header-title">Rooms Management</h5>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-main-site" href="../index.html">OPEN THE MAIN SITE</a>
+            <div class="dropdown">
+              <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <strong>Admin</strong>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" id="logoutMenu">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <main class="content p-4">
+          <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+              <h4 class="mb-1">Rooms</h4>
+              <p class="text-muted small mb-0">Manage room types, pricing, and availability</p>
+            </div>
+            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addRoomModal"><i class="fa fa-plus me-2"></i>Add New Room</button>
+          </div>
+
+          <div class="card p-3">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <div>
+                <input id="roomSearch" class="form-control form-control-sm" placeholder="Search rooms..." style="width: 280px;">
+              </div>
+            </div>
+            <div class="table-responsive">
+              <table class="table table-hover table-sm align-middle">
+                <thead class="table-light">
+                  <tr>
+                    <th>Room Code</th>
+                    <th>Type</th>
+                    <th>Capacity</th>
+                    <th>Price</th>
+                    <th>Status</th>
+                    <th>Actions</th>
+                  </tr>
+                </thead>
+                <tbody id="roomsTableBody">
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <!-- Add/Edit Room Modal -->
+    <div class="modal fade" id="addRoomModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Add New Room</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <div class="alert alert-info alert-dismissible fade show mb-3" role="alert">
+              <i class="fa fa-info-circle me-2"></i><strong>Note:</strong> Any room you add, edit, or delete here will automatically sync to the main website's booking page and featured rooms section.
+              <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+            </div>
+            <form id="roomForm">
+              <div class="mb-3">
+                <label class="form-label">Room Name</label>
+                <input type="text" class="form-control" id="roomNameInput" placeholder="e.g., Deluxe Room" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Room Type</label>
+                <input type="text" class="form-control" id="roomTypeInput" placeholder="e.g., Family Suite, Standard Room" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Guest Capacity</label>
+                <input type="number" class="form-control" id="roomCapacityInput" placeholder="e.g., 4" min="1" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Price per night</label>
+                <input type="number" class="form-control" id="roomPriceInput" placeholder="e.g., 2200" min="0" step="0.01" required>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select class="form-select" id="roomStatusSelect" required>
+                  <option value="Available">Available</option>
+                  <option value="Occupied">Occupied</option>
+                  <option value="Maintenance">Maintenance</option>
+                </select>
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+            <button type="button" class="btn btn-primary" id="addRoomSubmitBtn">Add Room</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+    <script>
+      function initRoomsPage() {
+        const ADMIN_ROOMS_KEY = 'dredsAdminRooms';
+        const defaultRooms = [];
+
+        // Load rooms from localStorage or start with empty array
+        let rooms = [];
+        const stored = localStorage.getItem(ADMIN_ROOMS_KEY);
+        if (stored) {
+          try {
+            const loadedRooms = JSON.parse(stored);
+            // Normalize prices and ensure room name is preserved.
+            rooms = loadedRooms.map(r => ({
+              name: r.name || r.type || r.code || '',
+              code: r.code || '',
+              type: r.type || r.name || r.code || '',
+              capacity: Number(r.capacity) || 0,
+              price: typeof r.price === 'string' ? parseFloat(r.price.replace(/[₱,]/g, '')) : Number(r.price) || 0,
+              status: r.status || 'Available',
+              amenities: r.amenities || '',
+              photo: r.photo || ''
+            }));
+          } catch (e) {
+            rooms = defaultRooms;
+          }
+        } else {
+          rooms = defaultRooms;
+          localStorage.setItem(ADMIN_ROOMS_KEY, JSON.stringify(rooms));
+        }
+
+        const tbody = document.getElementById('roomsTableBody');
+        const render = (data) => {
+          tbody.innerHTML = data.map(r => `
+            <tr>
+              <td><strong>${r.code}</strong></td>
+              <td>${r.type}</td>
+              <td>${r.capacity} guests</td>
+              <td>₱${Number(r.price || 0).toLocaleString()}</td>
+              <td>${statusBadge(r.status)}</td>
+              <td>
+                <button class="btn btn-sm btn-outline-secondary me-1" type="button" onclick="window.viewRoom('${r.code}')">View</button>
+                <button class="btn btn-sm btn-outline-primary me-1" type="button" onclick="window.editRoom('${r.code}')">Edit</button>
+                <button class="btn btn-sm btn-outline-danger" type="button" onclick="window.deleteRoom('${r.code}')">Delete</button>
+              </td>
+            </tr>
+          `).join('');
+        };
+
+        const statusBadge = (status) => {
+          const badges = {
+            'Available': 'badge-new',
+            'Occupied': 'badge-confirmed',
+            'Maintenance': 'badge-cancel'
+          };
+          return `<span class="badge-status ${badges[status]}">${status}</span>`;
+        };
+
+        document.getElementById('roomSearch').addEventListener('input', (e) => {
+          const query = e.target.value.toLowerCase();
+          const filtered = rooms.filter(r => Object.values(r).join(' ').toLowerCase().includes(query));
+          render(filtered);
+        });
+
+        let editIndex = null;
+        let modalMode = 'add';
+        const form = document.getElementById('roomForm');
+        const modalTitle = document.querySelector('#addRoomModal .modal-title');
+        const addRoomSubmitBtn = document.getElementById('addRoomSubmitBtn');
+        const roomNameInput = document.getElementById('roomNameInput');
+        const roomTypeInput = document.getElementById('roomTypeInput');
+        const roomStatusSelect = document.getElementById('roomStatusSelect');
+        const roomCapacityInput = document.getElementById('roomCapacityInput');
+        const roomPriceInput = document.getElementById('roomPriceInput');
+        const addNewRoomButton = document.querySelector('[data-bs-target="#addRoomModal"]');
+
+        const saveRooms = () => {
+          // Save rooms with explicit metadata for customer booking and room listings
+          const formattedRooms = rooms.map(r => ({
+            name: r.name || r.type || r.code || '',
+            code: r.code,
+            type: r.type || r.name || r.code || '',
+            status: r.status,
+            capacity: Number(r.capacity) || 0,
+            price: Number(String(r.price).replace(/[₱,]/g, '')) || 0,
+            amenities: r.amenities,
+            photo: r.photo
+          }));
+          localStorage.setItem(ADMIN_ROOMS_KEY, JSON.stringify(formattedRooms));
+        };
+
+        const resetForm = () => {
+          if (!form) return;
+          form.reset();
+          editIndex = null;
+          modalMode = 'add';
+          modalTitle.textContent = 'Add New Room';
+          addRoomSubmitBtn.textContent = 'Add Room';
+          roomNameInput.value = '';
+          roomTypeInput.value = '';
+          roomCapacityInput.value = '';
+          roomPriceInput.value = '';
+          roomStatusSelect.value = 'Available';
+          form.querySelectorAll('input, select').forEach((field) => field.disabled = false);
+        };
+
+        const fillForm = (room) => {
+          roomNameInput.value = room.name || '';
+          roomTypeInput.value = room.type || room.name || '';
+          roomCapacityInput.value = room.capacity || '';
+          roomPriceInput.value = room.price != null ? room.price : '';
+          roomStatusSelect.value = room.status || 'Available';
+        };
+
+        const openRoomModal = (mode, room = null) => {
+          modalMode = mode;
+          if (mode === 'add') {
+            resetForm();
+          } else {
+            modalTitle.textContent = mode === 'view' ? 'View Room' : 'Edit Room';
+            addRoomSubmitBtn.textContent = mode === 'view' ? 'Close' : 'Save Changes';
+            if (room) fillForm(room);
+            form.querySelectorAll('input, select').forEach((field) => {
+              field.disabled = mode === 'view';
+            });
+            // no photo field in this simplified room management form
+          }
+          const modalElement = document.getElementById('addRoomModal');
+          const bsModal = new bootstrap.Modal(modalElement);
+          bsModal.show();
+        };
+
+        const findRoomIndex = (code) => rooms.findIndex((room) => room.code === code);
+
+        const viewRoom = (code) => {
+          const index = findRoomIndex(code);
+          if (index < 0) return;
+          openRoomModal('view', rooms[index]);
+        };
+
+        const editRoom = (code) => {
+          const index = findRoomIndex(code);
+          if (index < 0) return;
+          editIndex = index;
+          openRoomModal('edit', rooms[index]);
+        };
+
+        const deleteRoom = (code) => {
+          const index = findRoomIndex(code);
+          if (index < 0) return;
+          if (!confirm(`Delete room ${code}? This cannot be undone.`)) return;
+          rooms.splice(index, 1);
+          saveRooms();
+          render(rooms);
+        };
+
+        window.viewRoom = viewRoom;
+        window.editRoom = editRoom;
+        window.deleteRoom = deleteRoom;
+
+        if (addNewRoomButton) {
+          addNewRoomButton.addEventListener('click', resetForm);
+        }
+
+        if (addRoomSubmitBtn) {
+          addRoomSubmitBtn.addEventListener('click', () => {
+            if (modalMode === 'view') {
+              const modal = bootstrap.Modal.getInstance(document.getElementById('addRoomModal'));
+              modal.hide();
+              resetForm();
+              return;
+            }
+
+            const roomName = roomNameInput.value.trim();
+            const roomType = roomTypeInput.value.trim();
+            const roomCapacity = Number(roomCapacityInput.value) || 0;
+            const roomPrice = Number(roomPriceInput.value) || 0;
+            const status = roomStatusSelect.value;
+
+            if (!roomName || !roomType || roomCapacity <= 0 || roomPrice < 0) {
+              alert('Please fill in all required fields and provide valid room capacity and price.');
+              return;
+            }
+
+            const formattedCode = roomName.toUpperCase().replace(/\s+/g, '-');
+            const existingCode = editIndex !== null ? rooms[editIndex].code : formattedCode;
+            const duplicate = rooms.some((r, i) => r.name === roomName && i !== editIndex);
+            if (duplicate) {
+              alert('A room with this name already exists. Please choose a different name.');
+              return;
+            }
+
+            const roomData = {
+              code: existingCode,
+              name: roomName,
+              type: roomType,
+              capacity: roomCapacity,
+              price: roomPrice,
+              status,
+              amenities: editIndex !== null ? rooms[editIndex].amenities : '',
+              photo: editIndex !== null ? rooms[editIndex].photo : ''
+            };
+
+            if (editIndex !== null) {
+              rooms[editIndex] = { ...rooms[editIndex], ...roomData };
+            } else {
+              rooms.push(roomData);
+            }
+
+            saveRooms();
+            render(rooms);
+            const modal = bootstrap.Modal.getInstance(document.getElementById('addRoomModal'));
+            modal.hide();
+            alert(editIndex !== null ? 'Room updated successfully!' : 'Room added successfully!');
+            resetForm();
+          });
+        }
+
+        render(rooms);
+
+        // Sidebar toggle
+        document.getElementById('toggleSidebar')?.addEventListener('click', () => {
+          document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        // Logout
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('../index.html');
+        });
+
+        document.getElementById('logoutMenu')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('../index.html');
+        });
+
+        // Auth check
+        if (localStorage.getItem('adminAuth') !== 'true') {
+          location.replace('login.html');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', initRoomsPage);
+    </script>
+  </body>
+</html>

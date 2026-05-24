@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Dashboard | Dred's Transient</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🏡</span>
+        <span class="logo-text">Dred's <em>Transient</em></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="index.html#rooms">Rooms</a></li>
+        <li><a href="pages/amenities.html">Amenities</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="pages/booking.html" class="nav-cta">Book Now</a></li>
+        <li><a href="login.html">Login</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-ghost customerLogout" type="button">Sign Out</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="index.html#rooms">Rooms</a>
+      <a href="pages/amenities.html">Amenities</a>
+      <a href="pages/about.html">About</a>
+      <a href="pages/booking.html">Book Now</a>
+      <a href="login.html">Login</a>
+      <a href="admin/index.html">Admin Panel</a>
+    </div>
+  </nav>
+
+  <section class="page-section" id="customerDashboardPage">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">My Dashboard</span>
+        <h1 id="welcomeText">Hello!</h1>
+        <p>Track your reservations and return to booking any time.</p>
+      </div>
+
+      <div id="customerNotificationArea" class="notification-area reveal page-enter"></div>
+
+      <div class="dashboard-row reveal page-enter">
+        <div class="dashboard-card">
+          <h3>Your upcoming bookings</h3>
+          <p id="bookingSummary">You have no active reservations yet.</p>
+          <a href="pages/booking.html" class="btn-primary">Book a Room</a>
+        </div>
+        <div class="dashboard-card">
+          <h3>Need help?</h3>
+          <p>Contact our reservation team at <strong>09918500322</strong> or through Facebook.</p>
+        </div>
+      </div>
+
+      <div class="table-card reveal page-enter">
+        <h2>My bookings</h2>
+        <div class="table-wrapper">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th>Booking ID</th>
+                <th>Room</th>
+                <th>Check-in</th>
+                <th>Check-out</th>
+                <th>Total</th>
+                <th>Status</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody id="customerBookingsBody"></tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">🏡</span> 
+        <span class="logo-text">Dred's <em>Transient</em></span>
+        <p>Your cozy home in the heart of Pili, Camarines Sur, Bicol.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navigate</h5>
+        <a href="index.html">Home</a>
+        <a href="index.html#rooms">Rooms</a>
+        <a href="pages/booking.html">Book Now</a>
+        <a href="admin/login.html">Admin Login</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="js/api-client.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Transient House Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="admin-shell d-flex">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top px-3 py-4 text-white">
+          <div class="brand d-flex align-items-center gap-2">
+            <div class="brand-text">
+              <div class="brand-title">TRANSIENT ADMIN</div>
+              <div class="brand-subtitle">Management</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav flex-column px-2">
+          <a href="index.html" class="nav-link active" data-section="dashboard"><i class="fa fa-gauge me-2"></i>Dashboard</a>
+          <a href="rooms.html" class="nav-link" data-section="rooms"><i class="fa fa-bed me-2"></i>Rooms</a>
+          <a href="bookings.html" class="nav-link" data-section="bookings"><i class="fa fa-calendar-check me-2"></i>Bookings</a>
+          <a href="admin-users.html" class="nav-link" data-section="users"><i class="fa fa-users me-2"></i>Admin Users</a>
+          <a href="#" class="nav-link mt-auto text-danger" id="logoutBtn"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+        </nav>
+      </aside>
+
+      <div class="main flex-fill">
+        <header class="topbar d-flex align-items-center justify-content-between px-3">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-sm btn-toggle d-md-none" id="toggleSidebar"><i class="fa fa-bars"></i></button>
+            <h5 class="mb-0 text-white header-title">Dashboard</h5>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-main-site" href="../index.html">OPEN THE MAIN SITE</a>
+            <div class="dropdown">
+              <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <strong>Admin</strong>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" id="logoutMenu">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <main class="content p-4">
+          <section class="page-intro mb-4">
+            <h2 class="section-title mb-2">Admin Dashboard</h2>
+            <p class="section-description">Quickly monitor rooms, guest capacity, booking activity, and revenue performance. All information is organized for fast review and easy action.</p>
+          </section>
+
+          <section class="stats-row mb-4">
+            <div class="row g-3">
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="stat-card stat-blue d-flex align-items-center justify-content-between p-3 rounded-3">
+                  <div>
+                    <small>Rooms Available</small>
+                    <div class="h4 mb-0" id="statRooms">--</div>
+                    <a href="rooms.html" class="small text-white-90">Manage rooms</a>
+                  </div>
+                  <div class="stat-icon"><i class="fa fa-key fa-2x"></i></div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="stat-card stat-cyan d-flex align-items-center justify-content-between p-3 rounded-3">
+                  <div>
+                    <small>Total Guest Capacity</small>
+                    <div class="h4 mb-0" id="statCapacity">--</div>
+                    <a href="rooms.html" class="small text-white-90">See capacity</a>
+                  </div>
+                  <div class="stat-icon"><i class="fa fa-users fa-2x"></i></div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="stat-card stat-green d-flex align-items-center justify-content-between p-3 rounded-3">
+                  <div>
+                    <small>Pending Bookings</small>
+                    <div class="h4 mb-0" id="statNewBookings">--</div>
+                    <a href="bookings.html" class="small text-white-90">Review bookings</a>
+                  </div>
+                  <div class="stat-icon"><i class="fa fa-calendar-check fa-2x"></i></div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="stat-card stat-orange d-flex align-items-center justify-content-between p-3 rounded-3">
+                  <div>
+                    <small>Confirmed Bookings</small>
+                    <div class="h4 mb-0" id="statConfirmed">--</div>
+                    <a href="bookings.html" class="small text-white-90">View confirmed</a>
+                  </div>
+                  <div class="stat-icon"><i class="fa fa-thumbs-up fa-2x"></i></div>
+                </div>
+              </div>
+              <div class="col-xl-3 col-lg-4 col-md-6">
+                <div class="stat-card stat-purple d-flex align-items-center justify-content-between p-3 rounded-3">
+                  <div>
+                    <small>Total Revenue</small>
+                    <div class="h4 mb-0" id="statTotalRevenue">--</div>
+                    <a href="bookings.html" class="small text-white-90">View revenue</a>
+                  </div>
+                  <div class="stat-icon"><i class="fa fa-coins fa-2x"></i></div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section class="card p-3 mb-4 analytics-panel">
+            <div class="d-flex align-items-start justify-content-between flex-column flex-md-row gap-3">
+              <div>
+                <h6 class="mb-1">Performance Overview</h6>
+                <p class="section-note mb-0">Database-backed analytics for bookings and revenue trends.</p>
+              </div>
+            </div>
+            <div class="mt-4 analytics-chart-wrap">
+              <canvas id="analyticsChart" height="200"></canvas>
+            </div>
+          </section>
+          <section class="row g-3 mb-4">
+            <div class="col-md-4">
+              <div class="card p-3 h-100 dashboard-summary-card">
+                <h6 class="mb-3">Latest Snapshot</h6>
+                <ul class="list-unstyled mb-0 dashboard-summary-list">
+                  <li><strong>Total Rooms:</strong> <span id="snapshotTotalRooms">--</span></li>
+                  <li><strong>Pending Bookings:</strong> <span id="snapshotPendingBookings">--</span></li>
+                  <li><strong>Confirmed Bookings:</strong> <span id="snapshotConfirmedBookings">--</span></li>
+                  <li><strong>Occupancy Rate:</strong> <span id="snapshotOccupancy">--</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card p-3 h-100 dashboard-summary-card">
+                <h6 class="mb-3">Capacity Summary</h6>
+                <ul class="list-unstyled mb-0 dashboard-summary-list">
+                  <li><strong>Total Capacity:</strong> <span id="snapshotTotalCapacity">--</span></li>
+                  <li><strong>Total Guests:</strong> <span id="snapshotTotalGuests">--</span></li>
+                  <li><strong>Currently Checked In:</strong> <span id="snapshotCheckedIn">--</span></li>
+                </ul>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="card p-3 h-100 dashboard-summary-card">
+                <h6 class="mb-3">Database Status</h6>
+                <p class="section-note mb-0">Live analytics are sourced from the database each time the dashboard loads.</p>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js"></script>
+  </body>
+</html>

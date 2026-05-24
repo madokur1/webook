@@ -1,0 +1,244 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Dred's Transient House – Pili, Camarines Sur</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">
+        <span class="logo-icon">🏡</span>
+        <span class="logo-text">Dred's <em>Transient</em></span>
+      </a>
+      <ul class="nav-links">
+        <li><a href="index.html" class="active">Home</a></li>
+        <li><a href="#rooms">Rooms</a></li>
+        <li><a href="pages/amenities.html">Amenities</a></li>
+        <li><a href="pages/about.html">About</a></li>
+        <li><a href="login.html">Login</a></li>
+        <li><a href="pages/booking.html" class="nav-cta">Book Now</a></li>
+      </ul>
+      <div class="nav-actions">
+        <button class="btn-ghost customerLogout" type="button">Sign Out</button>
+      </div>
+      <button class="burger" id="burger" aria-label="Toggle Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="index.html">Home</a>
+      <a href="#rooms">Rooms</a>
+      <a href="pages/amenities.html">Amenities</a>
+      <a href="pages/about.html">About</a>
+      <a href="login.html">Login</a>
+      <a href="#" class="customerLogout">Sign Out</a>
+      
+      <a href="pages/booking.html">Book Now</a>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" id="hero">
+    <!-- Replace the hero background image by updating the --hero-bg-image CSS variable below -->
+    <div class="hero-bg" style="--hero-bg-image: url('baks.png');">
+      <div class="hero-overlay"></div>
+      <div class="hero-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+    </div>
+    <div class="hero-content">
+      <div class="hero-badge slide-up">📍 Pili, Camarines Sur, Bicol</div>
+      <h1 class="hero-title slide-up delay-1">
+        Your Home<br/><em>Away From Home</em>
+      </h1>
+      <p class="hero-sub slide-up delay-2" id="heroSubtitle">
+        Cozy, spacious, and welcoming — Dred's Transient House offers flexible rooms for families, groups, and solo travelers.
+      </p>
+      <div class="hero-actions slide-up delay-3">
+        <a href="pages/booking.html" class="btn-primary">Book Your Stay</a>
+        <a href="#rooms" class="btn-outline">Explore Rooms</a>
+      </div>
+      <div class="hero-stats slide-up delay-4">
+        <div class="stat"><span class="stat-num" id="homeGuestsStat">50</span><span class="stat-label">Guests Max</span></div>
+        <div class="stat-divider"></div>
+        <div class="stat"><span class="stat-num" id="homeSupportStat">24/7</span><span class="stat-label">Support</span></div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Scroll to explore</span>
+      <div class="scroll-arrow"></div>
+    </div>
+  </section>
+
+  <!-- QUICK BOOK BAR -->
+  <section class="quick-book reveal">
+    <div class="container">
+      <form class="quick-form" action="pages/booking.html">
+        <div class="qf-group">
+          <label>Check-In</label>
+          <input type="date" name="checkin" id="checkin"/>
+        </div>
+        <div class="qf-divider"></div>
+        <div class="qf-group">
+          <label>Check-Out</label>
+          <input type="date" name="checkout" id="checkout"/>
+        </div>
+        <div class="qf-divider"></div>
+        <div class="qf-group">
+          <label>Guests</label>
+          <select name="guests">
+            <option>1–5</option>
+            <option>6–10</option>
+            <option>11–20</option>
+            <option>21–50</option>
+          </select>
+        </div>
+        <button type="submit" class="btn-primary qf-btn">Check Availability</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ROOMS PREVIEW -->
+  <section id="rooms" class="rooms-preview section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Accommodations</span>
+        <h2>Our Featured Rooms</h2>
+        <p>Image-only previews with automatic sliding — click View Details to explore each room.</p>
+      </div>
+      <div class="rooms-slider reveal" id="roomsSlider">
+        <div class="rooms-frame">
+          <div class="rooms-track" id="roomsTrack">
+            <!-- Slide 1: LORHEINE -->
+            <div class="room-card slider-card" data-images='["assets/images/lorheine1.jpg","assets/images/lorheine2.jpg","assets/images/lorheine3.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/lorheine1.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#lorheine" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 2: ELISSE -->
+            <div class="room-card slider-card" data-images='["assets/images/ellise1.jpg","assets/images/ellise2.jpg","assets/images/ellise3terrace.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/ellise1.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#elisse" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 3: ARCO -->
+            <div class="room-card slider-card" data-images='["assets/images/arcoROOM.jpg","assets/images/6.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/arcoROOM.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#arco" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 4 -->
+            <div class="room-card slider-card" data-images='["assets/images/lorheine2.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/lorheine2.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#lorheine" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 5 -->
+            <div class="room-card slider-card" data-images='["assets/images/ellise2.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/ellise2.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#elisse" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 6 -->
+            <div class="room-card slider-card" data-images='["assets/images/ass.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/ass.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#arco" class="btn-outline">View Details</a>
+              </div>
+            </div>
+            <!-- Slide 7 -->
+            <div class="room-card slider-card" data-images='["assets/images/hey.jpg"]'>
+              <div class="room-image" style="background-image:url('assets/images/hey.jpg');"></div>
+              <div class="room-overlay-btn">
+                <a href="pages/rooms.html#elisse" class="btn-outline">View Details</a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slider-controls">
+          <button type="button" class="slider-prev" aria-label="Previous slide">‹</button>
+          <div id="roomsDots" class="slider-dots"></div>
+          <button type="button" class="slider-next" aria-label="Next slide">›</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WHY CHOOSE US -->
+  <section class="why-us section-pad">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-tag">Why Dred's?</span>
+        <h2>A Stay You'll Always Remember</h2>
+      </div>
+      <div class="why-grid">
+        <div class="why-card reveal"><div class="why-icon">🏠</div><h4>Homey Atmosphere</h4><p>Designed to feel like home — warm, welcoming, and clean for every guest.</p></div>
+        <div class="why-card reveal delay-1"><div class="why-icon">👨‍👩‍👧‍👦</div><h4>50-Guest Capacity</h4><p>Big enough for reunions, events, and group retreats, with room to spare.</p></div>
+        <div class="why-card reveal delay-2"><div class="why-icon">📍</div><h4>Prime Bicol Location</h4><p>Easily found on Waze and Google Maps — right in the heart of Pili, Camarines Sur.</p></div>
+        <div class="why-card reveal delay-3"><div class="why-icon">💬</div><h4>Responsive Host</h4><p>DM us on Facebook or call 09918500322 and we'll get back to you fast.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CALL TO ACTION -->
+  <section class="cta-section section-pad">
+    <div class="container">
+      <div class="cta-box reveal">
+        <h2>Ready to Book Your Stay?</h2>
+        <p>Call us at <strong>09918500322</strong> or send us a message on Facebook. We're available 7 days a week!</p>
+        <div class="cta-actions">
+          <a href="pages/booking.html" class="btn-primary">Book Online</a>
+          <a href="https://www.facebook.com/Dredtransienthouse" target="_blank" class="btn-outline">Message on Facebook</a>
+        </div>
+        <p class="cta-note">📍 Find us on Waze or Google Maps: <em>Dred's Transient House</em></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div class="footer-brand">
+        <span class="logo-icon">🏡</span>
+        <span class="logo-text">Dred's <em>Transient</em></span>
+        <p>Your cozy home in the heart of Pili, Camarines Sur, Bicol.</p>
+      </div>
+      <div class="footer-links">
+        <h5>Navigate</h5>
+        <a href="index.html">Home</a>
+        <a href="index.html#rooms">Rooms</a>
+        <a href="pages/amenities.html">Amenities</a>
+        <a href="pages/about.html">About Us</a>
+        <a href="pages/booking.html">Book Now</a>
+        <a href="admin/index.html">Admin Panel</a>
+      </div>
+      <div class="footer-contact">
+        <h5>Contact</h5>
+        <p>📞 09918500322</p>
+        <p>📍 Pili, Camarines Sur, Bicol</p>
+        <a href="https://www.facebook.com/Dredtransienthouse" target="_blank">Facebook Page →</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>© 2025 Dred's Transient House. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/api-client.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

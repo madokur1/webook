@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Website - Transient House Admin</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+  </head>
+  <body>
+    <div class="admin-shell d-flex">
+      <aside class="sidebar" id="sidebar">
+        <div class="sidebar-top px-3 py-4 text-white">
+          <div class="brand d-flex align-items-center gap-2">
+            <div class="brand-text">
+              <div class="brand-title">TRANSIENT ADMIN</div>
+              <div class="brand-subtitle">Management</div>
+            </div>
+          </div>
+        </div>
+        <nav class="nav flex-column px-2">
+          <a href="index.html" class="nav-link" data-section="dashboard"><i class="fa fa-gauge me-2"></i>Dashboard</a>
+          <a href="rooms.html" class="nav-link" data-section="rooms"><i class="fa fa-bed me-2"></i>Rooms</a>
+          <a href="bookings.html" class="nav-link" data-section="bookings"><i class="fa fa-calendar-check me-2"></i>Bookings</a>
+          <a href="admin-users.html" class="nav-link" data-section="users"><i class="fa fa-users me-2"></i>Admin Users</a>
+          <a href="#" class="nav-link mt-auto text-danger" id="logoutBtn"><i class="fa fa-sign-out-alt me-2"></i>Logout</a>
+        </nav>
+      </aside>
+
+      <div class="main flex-fill">
+        <header class="topbar d-flex align-items-center justify-content-between px-3">
+          <div class="d-flex align-items-center gap-3">
+            <button class="btn btn-sm btn-toggle d-md-none" id="toggleSidebar"><i class="fa fa-bars"></i></button>
+            <h5 class="mb-0 text-white header-title">Website Management</h5>
+          </div>
+          <div class="d-flex align-items-center gap-2">
+            <a class="btn btn-sm btn-main-site" href="../index.html">OPEN THE MAIN SITE</a>
+            <div class="dropdown">
+              <a class="d-flex align-items-center text-white text-decoration-none dropdown-toggle" href="#" data-bs-toggle="dropdown">
+                <strong>Admin</strong>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#" id="logoutMenu">Sign out</a></li>
+              </ul>
+            </div>
+          </div>
+        </header>
+
+        <main class="content p-4">
+          <h4 class="mb-3">Website Management</h4>
+
+          <div class="row g-3">
+            <!-- Hero Section -->
+            <div class="col-lg-6">
+              <div class="card p-3">
+                <h6 class="mb-3"><i class="fa fa-image me-2 text-primary"></i>Hero Section</h6>
+                <div class="mb-3">
+                  <label class="form-label">Hero Title</label>
+                  <input id="heroTitleInput" type="text" class="form-control" value="Your Home Away From Home">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Hero Subtitle</label>
+                  <textarea id="heroSubtitleInput" class="form-control" rows="2">Cozy, spacious, and welcoming — Dred's Transient House</textarea>
+                </div>
+                <button class="btn btn-primary btn-sm" data-section="hero"><i class="fa fa-save me-2"></i>Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Contact Information -->
+            <div class="col-lg-6">
+              <div class="card p-3">
+                <h6 class="mb-3"><i class="fa fa-phone me-2 text-primary"></i>Contact Information</h6>
+                <div class="mb-3">
+                  <label class="form-label">Phone Number</label>
+                  <input id="contactPhoneInput" type="text" class="form-control" value="09918500322">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Email Address</label>
+                  <input id="contactEmailInput" type="email" class="form-control" value="info@dredstransient.com">
+                </div>
+                <button class="btn btn-primary btn-sm" data-section="contact"><i class="fa fa-save me-2"></i>Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Social Media -->
+            <div class="col-lg-6">
+              <div class="card p-3">
+                <h6 class="mb-3"><i class="fa fa-share-alt me-2 text-primary"></i>Social Media Links</h6>
+                <div class="mb-3">
+                  <label class="form-label">Facebook Page</label>
+                  <input id="socialFacebookInput" type="text" class="form-control" value="https://www.facebook.com/Dredtransienthouse">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Instagram Handle</label>
+                  <input id="socialInstagramInput" type="text" class="form-control" placeholder="@yourinsta">
+                </div>
+                <button class="btn btn-primary btn-sm" data-section="social"><i class="fa fa-save me-2"></i>Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Meta Tags -->
+            <div class="col-lg-6">
+              <div class="card p-3">
+                <h6 class="mb-3"><i class="fa fa-code me-2 text-primary"></i>SEO Settings</h6>
+                <div class="mb-3">
+                  <label class="form-label">Meta Title</label>
+                  <input id="seoTitleInput" type="text" class="form-control" value="Dred's Transient House - Pili, Camarines Sur">
+                </div>
+                <div class="mb-3">
+                  <label class="form-label">Meta Description</label>
+                  <textarea id="seoDescriptionInput" class="form-control" rows="2">Cozy transient house with 5 rooms, accommodates up to 50 guests</textarea>
+                </div>
+                <button class="btn btn-primary btn-sm" data-section="seo"><i class="fa fa-save me-2"></i>Save Changes</button>
+              </div>
+            </div>
+
+            <!-- Pages Management -->
+            <div class="col-12">
+              <div class="card p-3">
+                <h6 class="mb-3"><i class="fa fa-file-alt me-2 text-primary"></i>Pages</h6>
+                <div class="table-responsive">
+                  <table class="table table-sm mb-0">
+                    <thead class="table-light">
+                      <tr>
+                        <th>Page Title</th>
+                        <th>Slug</th>
+                        <th>Status</th>
+                        <th>Updated</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody id="pagesTableBody"></tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <div class="modal fade" id="pageEditModal" tabindex="-1">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="pageEditModalTitle">Edit Page</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+          </div>
+          <div class="modal-body">
+            <form id="pageEditForm">
+              <div class="mb-3">
+                <label class="form-label">Page Title</label>
+                <input id="pageTitleInput" type="text" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Page Slug</label>
+                <input id="pageSlugInput" type="text" class="form-control">
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Status</label>
+                <select id="pageStatusInput" class="form-select">
+                  <option value="Published">Published</option>
+                  <option value="Draft">Draft</option>
+                </select>
+              </div>
+              <div class="mb-3">
+                <label class="form-label">Last Updated</label>
+                <input id="pageUpdatedInput" type="date" class="form-control">
+              </div>
+            </form>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="button" id="savePageBtn" class="btn btn-primary">Save Page</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        const storageKey = 'dredsAdminWebsite';
+        const pagesKey = 'dredsAdminWebsitePages';
+
+        const heroTitleInput = document.getElementById('heroTitleInput');
+        const heroSubtitleInput = document.getElementById('heroSubtitleInput');
+        const contactPhoneInput = document.getElementById('contactPhoneInput');
+        const contactEmailInput = document.getElementById('contactEmailInput');
+        const socialFacebookInput = document.getElementById('socialFacebookInput');
+        const socialInstagramInput = document.getElementById('socialInstagramInput');
+        const seoTitleInput = document.getElementById('seoTitleInput');
+        const seoDescriptionInput = document.getElementById('seoDescriptionInput');
+        const pageTitleInput = document.getElementById('pageTitleInput');
+        const pageSlugInput = document.getElementById('pageSlugInput');
+        const pageStatusInput = document.getElementById('pageStatusInput');
+        const pageUpdatedInput = document.getElementById('pageUpdatedInput');
+        const savePageBtn = document.getElementById('savePageBtn');
+        const pagesTableBody = document.getElementById('pagesTableBody');
+        const pageEditModalElement = document.getElementById('pageEditModal');
+        const pageEditModal = new bootstrap.Modal(pageEditModalElement);
+
+        const defaultWebsite = {
+          heroTitle: 'Your Home Away From Home',
+          heroSubtitle: 'Cozy, spacious, and welcoming — Dred\'s Transient House',
+          contactPhone: '09918500322',
+          contactEmail: 'info@dredstransient.com',
+          socialFacebook: 'https://www.facebook.com/Dredtransienthouse',
+          socialInstagram: '',
+          seoTitle: "Dred's Transient House - Pili, Camarines Sur",
+          seoDescription: 'Cozy transient house with 5 rooms, accommodates up to 50 guests'
+        };
+
+        const defaultPages = [
+          {key: 'home', title: 'Home', slug: '/', status: 'Published', updated: '2025-05-20'},
+          {key: 'about', title: 'About', slug: '/about', status: 'Published', updated: '2025-05-20'},
+          {key: 'rooms', title: 'Rooms', slug: '/rooms', status: 'Published', updated: '2025-05-20'},
+          {key: 'booking', title: 'Booking', slug: '/booking', status: 'Published', updated: '2025-05-20'}
+        ];
+
+        let websiteData = defaultWebsite;
+        let pages = defaultPages.slice();
+        let activePageKey = null;
+
+        const loadWebsiteData = () => {
+          const stored = localStorage.getItem(storageKey);
+          if (stored) {
+            try {
+              websiteData = Object.assign({}, defaultWebsite, JSON.parse(stored));
+            } catch (error) {
+              websiteData = defaultWebsite;
+            }
+          }
+          const pagesStored = localStorage.getItem(pagesKey);
+          if (pagesStored) {
+            try {
+              pages = JSON.parse(pagesStored);
+            } catch (error) {
+              pages = defaultPages.slice();
+            }
+          }
+        };
+
+        const saveWebsiteData = () => {
+          const data = {
+            heroTitle: heroTitleInput.value,
+            heroSubtitle: heroSubtitleInput.value,
+            contactPhone: contactPhoneInput.value,
+            contactEmail: contactEmailInput.value,
+            socialFacebook: socialFacebookInput.value,
+            socialInstagram: socialInstagramInput.value,
+            seoTitle: seoTitleInput.value,
+            seoDescription: seoDescriptionInput.value
+          };
+          localStorage.setItem(storageKey, JSON.stringify(data));
+        };
+
+        const savePages = () => {
+          localStorage.setItem(pagesKey, JSON.stringify(pages));
+        };
+
+        const populateFields = () => {
+          heroTitleInput.value = websiteData.heroTitle;
+          heroSubtitleInput.value = websiteData.heroSubtitle;
+          contactPhoneInput.value = websiteData.contactPhone;
+          contactEmailInput.value = websiteData.contactEmail;
+          socialFacebookInput.value = websiteData.socialFacebook;
+          socialInstagramInput.value = websiteData.socialInstagram;
+          seoTitleInput.value = websiteData.seoTitle;
+          seoDescriptionInput.value = websiteData.seoDescription;
+        };
+
+        const renderPages = () => {
+          pagesTableBody.innerHTML = pages.map((page) => `
+            <tr>
+              <td><strong>${page.title}</strong></td>
+              <td>${page.slug}</td>
+              <td><span class="badge-status ${page.status === 'Published' ? 'badge-confirmed' : 'badge-new'}">${page.status}</span></td>
+              <td>${page.updated}</td>
+              <td><button class="btn btn-sm btn-outline-primary" type="button" onclick="window.editWebsitePage('${page.key}')">Edit</button></td>
+            </tr>
+          `).join('');
+        };
+
+        const editWebsitePage = (key) => {
+          activePageKey = key;
+          const page = pages.find((item) => item.key === key);
+          if (!page) return;
+          pageEditModalElement.querySelector('#pageEditModalTitle').textContent = `Edit ${page.title}`;
+          pageTitleInput.value = page.title;
+          pageSlugInput.value = page.slug;
+          pageStatusInput.value = page.status;
+          pageUpdatedInput.value = page.updated;
+          pageEditModal.show();
+        };
+
+        window.editWebsitePage = editWebsitePage;
+
+        savePageBtn.addEventListener('click', () => {
+          if (!activePageKey) return;
+          const pageIndex = pages.findIndex((item) => item.key === activePageKey);
+          if (pageIndex === -1) return;
+          pages[pageIndex] = {
+            key: activePageKey,
+            title: pageTitleInput.value.trim() || pages[pageIndex].title,
+            slug: pageSlugInput.value.trim() || pages[pageIndex].slug,
+            status: pageStatusInput.value,
+            updated: pageUpdatedInput.value || new Date().toISOString().slice(0, 10)
+          };
+          savePages();
+          renderPages();
+          pageEditModal.hide();
+          alert('Page updated successfully.');
+        });
+
+        document.querySelectorAll('button[data-section]').forEach((btn) => {
+          btn.addEventListener('click', () => {
+            saveWebsiteData();
+            alert('Website section saved successfully.');
+          });
+        });
+
+        loadWebsiteData();
+        populateFields();
+        renderPages();
+
+        document.getElementById('toggleSidebar')?.addEventListener('click', () => {
+          document.getElementById('sidebar').classList.toggle('open');
+        });
+
+        document.getElementById('logoutBtn')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('../index.html');
+        });
+
+        document.getElementById('logoutMenu')?.addEventListener('click', () => {
+          localStorage.removeItem('adminAuth');
+          localStorage.removeItem('adminUser');
+          location.replace('../index.html');
+        });
+
+        if (localStorage.getItem('adminAuth') !== 'true') {
+          location.replace('login.html');
+        }
+      });
+    </script>
+  </body>
+</html>

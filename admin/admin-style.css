@@ -1,0 +1,29 @@
+:root{
+  --bg:#f6f5f3;
+  --card:#ffffff;
+  --accent:#2c6e49;
+  --muted:#6b6b6b;
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:Arial,Helvetica,sans-serif;background:var(--bg);color:#111}
+.admin-center{min-height:100vh;display:flex;align-items:center;justify-content:center}
+.card{background:var(--card);border-radius:8px;box-shadow:0 6px 18px rgba(16,24,40,0.08);padding:24px;max-width:420px;width:100%}
+.brand{margin:0 0 12px 0;color:var(--accent);text-align:center}
+form{display:grid;gap:10px}
+label{font-size:13px;color:var(--muted)}
+input{padding:10px;border:1px solid #e5e5e5;border-radius:6px;background:#fff;color:#111}
+.btn{display:inline-block;padding:10px 14px;border-radius:6px;border:0;background:var(--accent);color:#fff;cursor:pointer}
+.btn:active,.btn:focus{outline:none;box-shadow:none}
+
+.admin-app{display:flex;min-height:100vh}
+.sidebar{width:220px;background:var(--card);padding:20px;border-right:1px solid #eee}
+.sidebar .logo{font-weight:700;color:var(--accent);margin-bottom:12px}
+.sidebar nav a{display:block;padding:8px 10px;color:#333;text-decoration:none;border-radius:4px}
+.sidebar nav a.active, .sidebar nav a:hover{background:linear-gradient(90deg,var(--accent),#3d8a60);color:#fff}
+.logout{margin-top:18px;background:transparent;border:1px solid #e2e2e2;padding:8px;width:100%;border-radius:6px}
+.content{flex:1;padding:24px}
+
+/* Keep forms and cards opaque to prevent transparency issues */
+.login-card, .card{background:var(--card) none}
+
+@media(max-width:700px){.admin-app{flex-direction:column}.sidebar{width:100%;border-right:0;border-bottom:1px solid #eee}}

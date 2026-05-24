@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Customer Login | Dred's Transient</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="auth-page">
+  <main class="auth-panel">
+    <div class="auth-brand">
+      <div class="brand-icon">🏨</div>
+      <div>
+        <p class="eyebrow">Dred's Transient</p>
+        <h1>Customer access</h1>
+      </div>
+    </div>
+
+    <div class="auth-heading">
+      <h1>Sign in to book your stay</h1>
+      <p>Use your email and password to access the booking area. After signing in, you'll be redirected to the booking page automatically.</p>
+    </div>
+
+    <div class="auth-tabs">
+      <button type="button" id="signInModeBtn" class="active">Sign In</button>
+      <button type="button" id="signUpModeBtn">Create Account</button>
+    </div>
+
+    <form id="customerLoginForm" class="auth-form active">
+      <div class="form-group input-with-icon">
+        <label for="customerEmail">Email address</label>
+        <input type="email" id="customerEmail" placeholder="you@example.com" required />
+        <span class="input-icon"><i class="bi bi-envelope-fill"></i></span>
+      </div>
+
+      <div class="form-group input-with-icon">
+        <label for="customerPassword">Password</label>
+        <input type="password" id="customerPassword" placeholder="••••••••" required />
+        <button type="button" class="password-toggle" data-target="customerPassword" aria-label="Toggle password visibility">
+          <i class="bi bi-eye"></i>
+        </button>
+      </div>
+
+      <div class="auth-row">
+        <label class="auth-remember">
+          <input type="checkbox" id="customerRemember" />
+          Remember me
+        </label>
+        <a href="forgot_password.php" class="auth-link auth-link-button" id="forgotPasswordLink">Forgot password?</a>
+      </div>
+
+      <p id="customerLoginError" class="form-feedback" aria-live="polite"></p>
+      <div class="auth-actions">
+        <button type="submit" class="btn-primary">Sign In</button>
+        <button type="button" class="btn-secondary" id="continueAsGuestBtn">Continue as guest</button>
+      </div>
+      <p class="auth-helper">Can't remember your password? <a href="forgot_password.php">Reset it here</a>.</p>
+    </form>
+
+    <form id="customerSignupForm" class="auth-form hidden">
+      <div class="form-group">
+        <label for="signupName">Full name</label>
+        <input type="text" id="signupName" placeholder="Juan dela Cruz" required />
+      </div>
+      <div class="form-group">
+        <label for="signupEmail">Email address</label>
+        <input type="email" id="signupEmail" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="signupPassword">Password</label>
+        <input type="password" id="signupPassword" placeholder="Create a password" required />
+      </div>
+      <div class="form-group">
+        <label for="signupConfirmPassword">Confirm password</label>
+        <input type="password" id="signupConfirmPassword" placeholder="Confirm password" required />
+      </div>
+
+      <p id="customerSignupError" class="form-feedback" aria-live="polite"></p>
+      <div class="auth-actions">
+        <button type="submit" class="btn-primary">Create account</button>
+        <button type="button" class="btn-secondary" id="continueAsGuestBtnSecondary">Continue as guest</button>
+      </div>
+    </form>
+    <form id="customerVerificationForm" class="auth-form hidden">
+      <div class="form-group">
+        <p class="verification-instruction">
+          A verification code has been sent to <strong id="verificationEmailText"></strong>.
+          Enter it below to complete account setup.
+        </p>
+        <label for="verificationCode">Verification code</label>
+        <input type="text" id="verificationCode" placeholder="123456" maxlength="6" inputmode="numeric" required />
+      </div>
+
+      <p id="customerVerificationError" class="form-feedback" aria-live="polite"></p>
+      <div class="auth-actions">
+        <button type="submit" class="btn-primary">Verify Account</button>
+        <button type="button" class="btn-secondary" id="verificationBackLink">Back to sign in</button>
+      </div>
+    </form>
+
+    <form id="forgotPasswordForm" class="auth-form hidden">
+      <div class="form-group">
+        <label for="recoverEmail">Registered email</label>
+        <input type="email" id="recoverEmail" placeholder="you@example.com" required />
+      </div>
+      <div class="form-group">
+        <label for="recoverNewPassword">New password</label>
+        <input type="password" id="recoverNewPassword" placeholder="New password" required />
+      </div>
+      <div class="form-group">
+        <label for="recoverConfirmPassword">Confirm new password</label>
+        <input type="password" id="recoverConfirmPassword" placeholder="Confirm new password" required />
+      </div>
+
+      <p id="forgotPasswordError" class="form-feedback" aria-live="polite"></p>
+      <div class="auth-actions">
+        <button type="submit" class="btn-primary">Reset password</button>
+        <button type="button" class="btn-secondary" id="recoverBackLink">Back to sign in</button>
+      </div>
+    </form>
+
+    <p class="auth-note">If you already have an account, sign in. New customers can create an account to save bookings and return later.</p>
+  </main>
+
+  <!-- Authentication script for PHP backend -->
+  <script src="js/auth.js"></script>
+</body>
+</html>
